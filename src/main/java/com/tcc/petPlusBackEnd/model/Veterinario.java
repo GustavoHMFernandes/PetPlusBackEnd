@@ -29,7 +29,6 @@ public class Veterinario {
 	@NotNull
 	private String cpf;
 	
-	@NotNull
 	private String rg;
 	
 	@NotNull
@@ -49,18 +48,19 @@ public class Veterinario {
 	
 	private int numero;
 	
+	@NotNull
 	private String tipo;
 	
 	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
 	private String imagem;
 	
-	@NotNull
+	
 	private String bairro;
 	
-	@NotNull
+	
 	private String cidade;
 	
-	@NotNull
+	
 	private String uf;
 	
 	public List<Clinica> getClinicaVeterinario() {
@@ -72,7 +72,7 @@ public class Veterinario {
 	}
 
 
-	@NotNull
+	
 	private int crmv;
 	
 	@ManyToMany
