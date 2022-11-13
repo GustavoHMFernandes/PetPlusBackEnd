@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 
 import com.tcc.petPlusBackEnd.model.Cliente;
-import com.tcc.petPlusBackEnd.model.ClienteLogin;
+import com.tcc.petPlusBackEnd.model.UsuarioLogin;
 import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.model.VeterinarioLogin;
 import com.tcc.petPlusBackEnd.repository.VeterinarioRepository;
@@ -48,12 +48,6 @@ public class VeterinarioController {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(vetService.cadastrarVeterinario(veterinario));
 		
-	}
-	
-	@PostMapping("/logar")
-	public ResponseEntity<VeterinarioLogin> Autentication(@RequestBody Optional<VeterinarioLogin> user){
-		return vetService.Logar(user).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 	
 	@PutMapping

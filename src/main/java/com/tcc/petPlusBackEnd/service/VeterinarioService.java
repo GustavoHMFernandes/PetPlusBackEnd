@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.tcc.petPlusBackEnd.model.UsuarioLogin;
 import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.model.VeterinarioLogin;
 import com.tcc.petPlusBackEnd.repository.VeterinarioRepository;
@@ -26,7 +27,7 @@ public class VeterinarioService {
 		return vetRepository.save(veterinario);
 	}
 	
-	public Optional<VeterinarioLogin> Logar(Optional <VeterinarioLogin> user){
+	public Optional<UsuarioLogin> Logar(Optional <UsuarioLogin> user){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Veterinario> usuario = vetRepository.findOneByNome(user.get().getUsuario());
 		

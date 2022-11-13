@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tcc.petPlusBackEnd.model.Cliente;
-import com.tcc.petPlusBackEnd.model.ClienteLogin;
+import com.tcc.petPlusBackEnd.model.UsuarioLogin;
 import com.tcc.petPlusBackEnd.repository.ClienteRepository;
 
 @Service
@@ -27,7 +27,7 @@ public class ClienteService {
 		return repository.save(cliente);
 	}
 	
-	public Optional<ClienteLogin> Logar(Optional <ClienteLogin> user){
+	public Optional<UsuarioLogin> Logar(Optional <UsuarioLogin> user){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Cliente> usuario = repository.findByNome(user.get().getUsuario());
 		

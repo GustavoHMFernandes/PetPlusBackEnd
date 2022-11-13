@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.tcc.petPlusBackEnd.model.Cliente;
-import com.tcc.petPlusBackEnd.model.ClienteLogin;
+import com.tcc.petPlusBackEnd.model.UsuarioLogin;
 import com.tcc.petPlusBackEnd.model.Veterinario;
 
 public class UserDetailsImpl implements UserDetails{

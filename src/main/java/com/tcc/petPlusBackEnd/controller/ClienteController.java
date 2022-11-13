@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tcc.petPlusBackEnd.model.Cliente;
-import com.tcc.petPlusBackEnd.model.ClienteLogin;
+import com.tcc.petPlusBackEnd.model.UsuarioLogin;
 import com.tcc.petPlusBackEnd.service.ClienteService;
 import com.tcc.petPlusBackEnd.repository.ClienteRepository;
 
@@ -32,12 +32,6 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteRepository repositorio;
-	
-	@PostMapping("/logar")
-	public ResponseEntity<ClienteLogin> Autentication(@RequestBody Optional<ClienteLogin> user){
-		return usuarioService.Logar(user).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-	}
 	
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Cliente> Post(@RequestBody Cliente cliente){

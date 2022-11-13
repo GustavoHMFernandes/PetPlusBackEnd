@@ -1,10 +1,12 @@
 package com.tcc.petPlusBackEnd.model;
 
-public class ClienteLogin {
+public class UsuarioLogin {
 	private String nome;
 	private String usuario;
 	private String senha;
 	private String token;
+	private String tipo;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -29,4 +31,11 @@ public class ClienteLogin {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 }
