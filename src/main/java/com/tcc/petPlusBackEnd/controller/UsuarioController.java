@@ -43,7 +43,7 @@ public class UsuarioController {
 			return vetService.Logar(user).map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 		}else {
-			return null;
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 		}
 
 		

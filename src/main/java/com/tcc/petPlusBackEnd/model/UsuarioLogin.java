@@ -2,7 +2,8 @@ package com.tcc.petPlusBackEnd.model;
 
 public class UsuarioLogin {
 	private String nome;
-	private String usuario;
+	private String email;
+	private String imagem;
 	private String senha;
 	private String token;
 	private String tipo;
@@ -12,12 +13,6 @@ public class UsuarioLogin {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 	public String getSenha() {
 		return senha;
@@ -37,5 +32,18 @@ public class UsuarioLogin {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+	
 	
 }
