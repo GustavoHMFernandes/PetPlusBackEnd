@@ -13,28 +13,30 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name ="tb_agenda")
 public class Agenda {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idAgenda;
-	
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date horario  = new java.sql.Date(System.currentTimeMillis());
-	
-	@ManyToOne
-	@JoinColumn(name="idClient", nullable=false)
-	private Cliente clienteAgenda;
-	
-	@ManyToOne
-	@JoinColumn(name="idClinica", nullable=false)
-	private Clinica clinicaAgenda;
-	
-	private long petID;
-	
-	private long servicoID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idAgenda;
+
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date horario  = new java.sql.Date(System.currentTimeMillis());
+
+    @ManyToOne
+    @JsonIgnoreProperties({"email","senha","agenda"})
+    private Cliente clienteAgenda;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"agenda"})
+    private Clinica clinicaAgenda;
+
+    private Long petID;
+
+    private Long servicoID;
 	
 	public long getIdAgenda() {
 		return idAgenda;
@@ -81,6 +83,14 @@ public class Agenda {
 	}
 
 	public void setServicoID(long servicoID) {
+		this.servicoID = servicoID;
+	}
+
+	public void setPetID(Long petID) {
+		this.petID = petID;
+	}
+
+	public void setServicoID(Long servicoID) {
 		this.servicoID = servicoID;
 	}
 	

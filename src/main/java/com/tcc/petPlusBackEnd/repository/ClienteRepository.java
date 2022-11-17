@@ -8,4 +8,6 @@ import com.tcc.petPlusBackEnd.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	public Optional<Cliente> findByEmail(String email);
+	public Optional<Cliente> findByIdClient(Long idClient);
+
 }

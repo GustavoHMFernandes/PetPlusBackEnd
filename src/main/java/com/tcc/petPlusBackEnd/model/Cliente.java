@@ -23,47 +23,50 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="tb_cliente")
 public class Cliente {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long idClient;
-	
-	@NotNull
-	@Size(min = 3, max= 50)
-	private String nome;
-	
-	@NotNull
-	private String cpf;
-	
-	@NotNull
-	@Email(message = "O atributo Usuario deve ser um email válido")
-	private String email;
-	
-	@NotNull
-	@Size(min = 5)
-	private String senha;
-	
-	@NotNull
-	private String telefone;
-	
-	private String tipo;
-	
-	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
-	private String imagem;
-	
-	private String logradouro;
-	
-	private int numero;
-	
-	private String bairro;
-	
-	private String cidade;
-	
-	private String uf;
-	
-	@OneToMany(mappedBy = "clientePet", cascade = CascadeType.ALL)
-	private List<Pet> pet;
-	
-	@OneToMany(mappedBy = "clienteAgenda", cascade = CascadeType.ALL)
-	private List<Agenda> agenda;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long idClient;
+
+    @NotNull
+    @Size(min = 3, max= 50)
+    private String nome;
+
+    @NotNull
+    private String cpf;
+
+    @NotNull
+    @Email(message = "O atributo Usuario deve ser um email válido")
+    private String email;
+
+    @NotNull
+    @Size(min = 5)
+    private String senha;
+
+    @NotNull
+    private String telefone;
+    
+    @NotNull
+    private String tipo;
+
+    @Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
+    private String imagem;
+
+    private String logradouro;
+
+    private int numero;
+
+    private String bairro;
+
+    private String cidade;
+
+    private String uf;
+
+    @OneToMany(mappedBy = "clientePet", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties({"clientePet"})
+    private List<Pet> pet;
+
+    @OneToMany(mappedBy = "clienteAgenda", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties({"clienteAgenda"})
+    private List<Agenda> agenda;
 
 	public long getIdClient() {
 		return idClient;
@@ -175,6 +178,14 @@ public class Cliente {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public List<Agenda> getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(List<Agenda> agenda) {
+		this.agenda = agenda;
 	}
 	
 	

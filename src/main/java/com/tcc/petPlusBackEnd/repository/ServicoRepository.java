@@ -9,9 +9,5 @@ import com.tcc.petPlusBackEnd.model.Servico;
 
 @Repository
 public interface ServicoRepository extends JpaRepository<Servico, Long>{
-	@Query(
-		value="SELECT * FROM tb_servico s WHERE s.id_clinica = ?1", 
-		nativeQuery = true
-	) 
-	public List<Servico> findByclinicaServico(Long idCLinica); 
+
 }

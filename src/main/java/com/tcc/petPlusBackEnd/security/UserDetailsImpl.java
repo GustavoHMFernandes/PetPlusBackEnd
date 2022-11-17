@@ -21,6 +21,11 @@ public class UserDetailsImpl implements UserDetails{
 		this.password = user.getSenha();
 	}
 	
+	public UserDetailsImpl(Veterinario user) {
+		this.userName = user.getNome();
+		this.password = user.getSenha();
+	}
+	
 	
 	public UserDetailsImpl() {}
 	

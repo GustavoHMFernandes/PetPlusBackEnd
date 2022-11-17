@@ -9,60 +9,63 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="tb_clinica")
 public class Clinica {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long idClinica;
-	
-	@NotNull
-	private String nome;
-	
-	@NotNull
-	@Email(message = "O atributo Usuario deve ser um email válido")
-	private String email;
-	
-	@NotNull
-	@Size(min = 5)
-	private String senha;
-	
-	@NotNull
-	private String telefone;
-	
-	@Column(name = "logradouro")
-	private String logradouro;
-	
-	private int numero;
-	
-	private String tipo;
-	
-	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
-	private String imagem;
-	
-	@NotNull
-	private String bairro;
-	
-	@NotNull
-	private String cidade;
-	
-	@NotNull
-	private String uf;
-	
-	@OneToMany(mappedBy = "clinicaServico", cascade = CascadeType.ALL)
-	private List<Servico> servicoClinica;
-	
-	@ManyToMany(mappedBy = "clinicaVeterinario") 
-	private List<Veterinario> veterinario;
-	
-	@OneToMany(mappedBy = "clinicaAgenda", cascade = CascadeType.ALL)
-	private List<Agenda> agenda;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long idClinica;
+
+    @NotNull
+    private String nome;
+
+    @NotNull
+    @Email(message = "O atributo Usuario deve ser um email válido")
+    private String email;
+
+
+    @NotNull
+    private String telefone;
+
+    @Column(name = "logradouro")
+    private String logradouro;
+
+    private int numero;
+
+
+
+    @Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
+    private String imagem;
+
+
+    private String bairro;
+
+    private String cidade;
+
+
+    private String uf;
+
+    @OneToMany(mappedBy = "clinicaServico", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties({"clinicaServico"})
+    private List<Servico> servicoClinica;
+
+    @ManyToOne
+    @JsonIgnoreProperties ({"senha","email","clinicaVeterinario"})
+    private Veterinario veterinario;
+
+
+    @OneToMany(mappedBy = "clinicaAgenda", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties({"clinicaAgenda"})
+    private List<Agenda> agenda;
 	  
 	public long getIdClinica() {
 		return idClinica;
@@ -88,12 +91,12 @@ public class Clinica {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public Veterinario getVeterinario() {
+		return veterinario;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setVeterinario(Veterinario veterinario) {
+		this.veterinario = veterinario;
 	}
 
 	public String getTelefone() {
@@ -136,14 +139,6 @@ public class Clinica {
 		this.uf = uf;
 	}
 
-	public List<Veterinario> getVeterinario() {
-		return veterinario;
-	}
-
-	public void setVeterinario(List<Veterinario> veterinario) {
-		this.veterinario = veterinario;
-	}
-
 	public List<Servico> getServicoClinica() {
 		return servicoClinica;
 	}
@@ -158,14 +153,6 @@ public class Clinica {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getImagem() {

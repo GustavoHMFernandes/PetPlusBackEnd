@@ -37,7 +37,12 @@ public class VeterinarioController {
 	public ResponseEntity<List<Veterinario>> getAll() {
 		return ResponseEntity.ok(vetRepository.findAll());
 	}
-
+	
+	@GetMapping("/id/{idVeterinario}")
+    public ResponseEntity<Optional<Veterinario>> getById(@PathVariable Long idVeterinario) {
+        return ResponseEntity.ok(vetRepository.findById(idVeterinario));
+    }
+	
 	@GetMapping("/{nome}")
 	public ResponseEntity<List<Veterinario>> getByNome(@PathVariable String nome) {
 		return ResponseEntity.ok(vetRepository.findByNome(nome));
@@ -51,9 +56,12 @@ public class VeterinarioController {
 	}
 	
 	@PutMapping
-	public  ResponseEntity<Veterinario> put(@RequestBody Veterinario veterinario){
-		return ResponseEntity.status(HttpStatus.OK).body(vetRepository.save(veterinario));
-	}
+    public  ResponseEntity<Veterinario> put(@RequestBody Veterinario veterinario){
+
+        return vetService.atualizarVeterinario(veterinario)
+                .map(resp -> ResponseEntity.status(HttpStatus.OK).body(resp))
+                .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+    }
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id){

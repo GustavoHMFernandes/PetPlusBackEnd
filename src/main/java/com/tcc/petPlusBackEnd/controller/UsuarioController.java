@@ -39,7 +39,7 @@ public class UsuarioController {
 		if(user.get().getTipo().equalsIgnoreCase("cliente")) {
 			return clienteService.Logar(user).map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-		}else if(user.get().getTipo().equalsIgnoreCase("veterianario")) {
+		}else if(user.get().getTipo().equalsIgnoreCase("veterinario")) {
 			return vetService.Logar(user).map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 		}else {

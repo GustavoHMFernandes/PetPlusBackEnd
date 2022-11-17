@@ -10,80 +10,61 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name="tb_veterinario")
+@Table(name = "tb_veterinario")
 public class Veterinario {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idVeterinario;
-	
-	@Size(min = 3, max= 50)
+
+	@Size(min = 3, max = 50)
 	private String nome;
-	
+
 	@NotNull
 	private String cpf;
-	
+
 	private String rg;
-	
+
 	@NotNull
 	@Email(message = "O atributo Usuario deve ser um email válido")
 	private String email;
-	
+
 	@NotNull
 	@Size(min = 5)
 	private String senha;
-	
-	@NotNull
+
 	private String telefone;
-	
-	
+
 	@Column(name = "logradouro")
 	private String logradouro;
-	
+
 	private int numero;
-	
-	@NotNull
+
 	private String tipo;
-	
+
 	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
 	private String imagem;
-	
-	
+
 	private String bairro;
-	
-	
+
 	private String cidade;
-	
-	
+
 	private String uf;
 	
-	public List<Clinica> getClinicaVeterinario() {
-		return clinicaVeterinario;
-	}
-
-	public void setClinicaVeterinario(List<Clinica> clinicaVeterinario) {
-		this.clinicaVeterinario = clinicaVeterinario;
-	}
-
-
-	
 	private int crmv;
-	
-	@ManyToMany
-	@JoinTable(
-		name = "Veterinario_Clinica", 
-		joinColumns = @JoinColumn(name ="idVeterinario"), 
-		inverseJoinColumns = @JoinColumn(name = "idClinica") 
-	)
-	private List<Clinica> clinicaVeterinario;
-	
 
+	@OneToMany(mappedBy = "veterinario", cascade = javax.persistence.CascadeType.REMOVE)
+	@JsonIgnoreProperties({ "veterinario" })
+	private List<Clinica> clinicaVeterinario;
 
 	public long getIdVeterinario() {
 		return idVeterinario;
@@ -173,14 +154,6 @@ public class Veterinario {
 		this.uf = uf;
 	}
 
-	public int getCrmv() {
-		return crmv;
-	}
-
-	public void setCrmv(int crmv) {
-		this.crmv = crmv;
-	}
-
 	public int getNumero() {
 		return numero;
 	}
@@ -204,7 +177,21 @@ public class Veterinario {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-	
-	
+
+	public int getCrmv() {
+		return crmv;
+	}
+
+	public void setCrmv(int crmv) {
+		this.crmv = crmv;
+	}
+
+	public List<Clinica> getClinicaVeterinario() {
+		return clinicaVeterinario;
+	}
+
+	public void setClinicaVeterinario(List<Clinica> clinicaVeterinario) {
+		this.clinicaVeterinario = clinicaVeterinario;
+	}
 
 }

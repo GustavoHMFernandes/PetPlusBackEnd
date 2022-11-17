@@ -40,15 +40,15 @@ public class ClinicaController {
 		return ResponseEntity.ok(clinicaRepository.findByNome(nome));
 	}
 
-	@GetMapping("/servico/{clinicaID}")
-	public ResponseEntity<List<Servico>> getServiceByClinica(@PathVariable long clinicaID) {
-		return ResponseEntity.ok(servicoRepository.findByclinicaServico(clinicaID));
-	}
-
 	@GetMapping("/endereco/{logradouro}")
 	public ResponseEntity<List<Clinica>> getByLogradouro(@PathVariable String logradouro) {
 		return ResponseEntity.ok(clinicaRepository.findByLogradouro(logradouro));
 	}
+	
+	@GetMapping("/id/{idClinica}")
+    public ResponseEntity<Clinica> getById(@PathVariable Long idClinica) {
+        return clinicaRepository.findById(idClinica).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
+    }
 
 	@PostMapping
 	public ResponseEntity<Clinica> Post(@RequestBody Clinica clinica) {

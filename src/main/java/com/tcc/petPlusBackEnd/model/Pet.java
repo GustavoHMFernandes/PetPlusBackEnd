@@ -16,28 +16,28 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="tb_pet")
 public class Pet {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long idPet;
-	
-	@NotNull
-	@Size(min = 2, max = 30)
-	String nome;
-	
-	@NotNull
-	int idade;
-	
-	@NotNull
-	String especie;
-	
-	@NotNull
-	String porte;
-	
-	@NotNull
-	String raca;
-	
-	@ManyToOne
-	@JoinColumn(name="idClient", nullable=false)
-	private Cliente clientePet;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long idPet;
+
+    @NotNull
+    @Size(min = 2, max = 30)
+    String nome;
+
+    @NotNull
+    int idade;
+
+    @NotNull
+    String especie;
+
+    @NotNull
+    String porte;
+
+    @NotNull
+    String raca;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"senha", "email", "pet"})
+    private Cliente clientePet;
 
 	public long getIdPet() {
 		return idPet;

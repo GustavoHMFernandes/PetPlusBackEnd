@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.petPlusBackEnd.model.Cliente;
+import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.repository.ClienteRepository;
 import com.tcc.petPlusBackEnd.repository.VeterinarioRepository;
 
@@ -23,9 +24,14 @@ public class UserDetailsServiceImpl  implements UserDetailsService  {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Optional<Cliente> user = clienteRepository.findByEmail(userName);
-		user.orElseThrow(() -> new UsernameNotFoundException(userName + "not found"));
-		return user.map(UserDetailsImpl::new).get();
+		if(clienteRepository.findByEmail(userName).isPresent()) {
+			Optional<Cliente> user = clienteRepository.findByEmail(userName);
+			return user.map(UserDetailsImpl::new).get();
+		}else {
+			Optional<Veterinario> user = vetRepository.findOneByEmail(userName);
+			return user.map(UserDetailsImpl::new).get();
+		}
+		
 	}
 
 }

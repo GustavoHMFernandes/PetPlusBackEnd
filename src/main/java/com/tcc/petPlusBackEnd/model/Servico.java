@@ -20,18 +20,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_servico")
 public class Servico {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long idServico;
-	
-	@NotNull
-	String tipoServico;
-	
-	@NotNull
-	Double valor;
-	
-	@ManyToOne
-	@JoinColumn(name="idClinica", nullable=false)
-	private Clinica clinicaServico;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long idServico;
+
+    @NotNull
+    String tipoServico;
+
+    @NotNull
+    Double valor;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"servicoClinica","veterinario"})
+    private Clinica clinicaServico;
 
 	public long getIdServico() {
 		return idServico;
